@@ -9,76 +9,93 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hp_banner_yAYTr8": {
+      "type": "hp_banner",
       "blocks": {
-        "heading": {
+        "heading_8Pyecx": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "type": "title",
+            "heading_text": "SWEATSUIT SETS",
+            "heading_size": "ts:!text-3xl",
+            "text_transform": "ts:uppercase",
+            "letter_spacing": 0
           }
         },
-        "button": {
+        "buttons_pPtqqb": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_url": "shopify://collections/business-collection",
+            "button_text": "COLLECTION",
+            "btn_style": "button--outline"
+          }
+        },
+        "buttons_8MJJqw": {
+          "type": "buttons",
+          "settings": {
+            "button_url": "shopify://collections/shop-catalog",
+            "button_text": "SHOP NOW",
+            "btn_style": "button--outline"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "heading_8Pyecx",
+        "buttons_pPtqqb",
+        "buttons_8MJJqw"
       ],
+      "name": "Banner",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "banner_type": "image",
+        "add_overlay": false,
+        "overlay_opacity": 0.5,
+        "enable_audio": false,
+        "banner_image": "shopify://shop_images/hp_banner.jpg",
+        "banner_img_mb": "shopify://shop_images/hp_banner_mob.jpg",
+        "content_alignment_h": "ts:md:items-center",
+        "content_alignment_v": "ts:md:justify-end",
+        "text_alignment": "center",
+        "content_alignment_h_mobile": "ts:items-center",
+        "content_alignment_v_mobile": "ts:justify-end",
+        "text_alignment_mobile": "center",
+        "top_spacing": 0,
+        "bottom_spacing": 9.5,
+        "top_spacing_mobile": 0,
+        "bottom_spacing_mobile": 6.5
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
+        "collection": "all",
+        "products_to_show": 3,
+        "title": "New Arrival",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
+        "columns_desktop": 3,
+        "enable_desktop_slider": false,
+        "full_width": true,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "columns_mobile": "2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
         "padding_top": 44,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "image_banner",
+    "hp_banner_yAYTr8",
     "featured_collection"
   ]
 }

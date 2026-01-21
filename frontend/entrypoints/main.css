@@ -3,22 +3,24 @@
 @import "tailwindcss" prefix(ts);
 
 @theme {
-  --font-teachers: 'Teachers', sans-serif;
+  --font-heading: Helvetica, Arial, sans-serif;
+  --font-body: "Archivo Narrow", sans-serif;
 
 	--color-white: #ffffff;
   --color-black: #000000;
+  --color-dark: #2C2C2C;
   --color-transparent: transparent;
-  --color-gray: #D9D9D9;
-  --color-gray1: #F4F3F3;
-  --color-gray2: #959490;
+  --color-lightgray: #F6F6F6;
+  --color-gray: #EBEBEB;
+  --color-gray1: #606060;
 
-  --text-xs: 1.2rem;
-  --text-sm: 1.4rem;
+  --text-xs: 1.1rem;
+  --text-sm: 1.3rem;
   --text-base: 1.5rem;
-  --text-lg: 2.1rem;
-  --text-xl: clamp(2.5rem, 2vw, 3rem);
+  --text-lg: 1.8rem;
+  --text-xl: 2.5rem;
   --text-2xl: clamp(3.2rem, 3vw, 5rem);
-  --text-3xl: clamp(3.5rem, 4vw, 6.5rem);
+  --text-3xl: clamp(3rem, 5vw, 8.5rem);
   --text-big: clamp(6.5rem, 10vw, 11.5rem);
 
 	--breakpoint-sm: 576px;
