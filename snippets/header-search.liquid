@@ -9,19 +9,20 @@
 {% endcomment %}
 
 <details-modal class="header__search">
-  <details>
+  <details class="ts:flex">
     <summary
       class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle"
       aria-haspopup="dialog"
       aria-label="{{ 'general.search.search' | t }}"
     >
       <span>
-        <span class="svg-wrapper">
+        <span class="svg-wrapper ts:xl:hidden!">
           {{- 'icon-search.svg' | inline_asset_content -}}
         </span>
-        <span class="svg-wrapper header__icon-close">
+        <span class="svg-wrapper header__icon-close visually-hidden">
           {{- 'icon-close.svg' | inline_asset_content -}}
         </span>
+        <span class="ts:xl:flex! ts:hidden!">{{ 'general.search.search' | t }}</span>
       </span>
     </summary>
     <div

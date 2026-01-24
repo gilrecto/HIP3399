@@ -1,4 +1,5 @@
 @import '../web/styles/hp_global_styles.css';
+@import '../web/styles/hp_index.css';
 
 @import "tailwindcss" prefix(ts);
 

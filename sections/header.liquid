@@ -256,7 +256,7 @@
           rel="nofollow"
         >
           {%- if section.settings.enable_customer_avatar -%}
-            <account-icon>
+            <account-icon class="ts:xl:hidden!">
               {%- if customer and customer.has_avatar? -%}
                 {{ customer | avatar }}
               {%- else -%}
@@ -266,7 +266,7 @@
           {%- else -%}
             <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
           {%- endif -%}
-          <span class="visually-hidden">
+          <span class="ts:xl:flex! ts:hidden!">
             {%- liquid
               if customer
                 echo 'customer.account_fallback' | t
@@ -287,11 +287,11 @@
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {% if cart == empty %}
-          <span class="svg-wrapper">{{ 'icon-cart-empty.svg' | inline_asset_content }}</span>
+          <span class="svg-wrapper ts:xl:hidden!">{{ 'icon-bag.svg' | inline_asset_content }}</span>
         {% else %}
-          <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+          <span class="svg-wrapper ts:xl:hidden!">{{ 'icon-bag.svg' | inline_asset_content }}</span>
         {% endif %}
-        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        <span class="ts:xl:flex! ts:hidden!">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
           <div class="cart-count-bubble">
             {%- if cart.item_count < 100 -%}

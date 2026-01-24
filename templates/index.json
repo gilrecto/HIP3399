@@ -44,10 +44,16 @@
         "buttons_pPtqqb",
         "buttons_8MJJqw"
       ],
+      "custom_css": [
+        ".contents-wrapper h2 {--letter-spacing: clamp(0.75rem, 1.2vw, 2rem) !important; font-weight: 400; --tw-leading: 1.3; margin-bottom: clamp(10rem, 9vw, 11.5rem);}",
+        "@media only screen and (min-width: 992px) {.btn-wrapper {gap: clamp(8.5rem, 9vw, 11.5rem); }}",
+        "@media only screen and (max-width: 767px) {.btn-wrapper {flex-direction: column; row-gap: 2rem; } .btn-wrapper > a {min-width: 28rem; }}"
+      ],
       "name": "Banner",
       "settings": {
         "color_scheme": "scheme-3",
         "banner_type": "image",
+        "banner_height": 78,
         "add_overlay": false,
         "overlay_opacity": 0.5,
         "enable_audio": false,
@@ -60,42 +66,59 @@
         "content_alignment_v_mobile": "ts:justify-end",
         "text_alignment_mobile": "center",
         "top_spacing": 0,
-        "bottom_spacing": 9.5,
+        "bottom_spacing": 9,
         "top_spacing_mobile": 0,
-        "bottom_spacing_mobile": 6.5
+        "bottom_spacing_mobile": 7.5
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "hp_featured_collection_AYMbnB": {
+      "type": "hp_featured_collection",
+      "custom_css": [
+        "@media only screen and (min-width: 768px) {swiper-slider .swiper .swiper-wrapper {column-gap: calc(clamp(2.5rem, 19.531vw - 12.5rem, 25rem));}}"
+      ],
+      "name": "Featured Collection",
       "settings": {
-        "collection": "all",
+        "collection": "shop-catalog",
         "products_to_show": 3,
-        "title": "New Arrival",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 3,
-        "enable_desktop_slider": false,
-        "full_width": true,
+        "show_title": true,
+        "title_source": "custom",
+        "title_text": "New Arrival",
+        "title_size": "ts:!text-xl",
+        "to_uppercase": true,
+        "title_align_desktop": "left",
+        "title_align_mobile": "left",
+        "desktop_layout": "grid",
+        "desktop_columns": "3",
+        "mobile_layout": "swiper",
+        "mobile_columns": "2",
+        "swiper_slides_per_view": 3,
+        "swiper_slides_per_view_tab": 3,
+        "swiper_slides_per_view_mob": 1,
+        "swiper_space_between": 50,
+        "swiper_navigation": true,
+        "swiper_pagination": false,
+        "swiper_autoplay": false,
+        "swiper_autoplay_speed": 300,
         "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
+        "view_all_text": "View All",
+        "view_all_align_desktop": "center",
+        "view_all_align_mobile": "center",
+        "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 44,
-        "padding_bottom": 36
+        "color_scheme": "",
+        "pad_desk": 110,
+        "pad_lap": 80,
+        "pad_tab": 60,
+        "pad_mob": 40
       }
     }
   },
   "order": [
     "hp_banner_yAYTr8",
-    "featured_collection"
+    "hp_featured_collection_AYMbnB"
   ]
 }

@@ -1,0 +1,17 @@
+body.index-page .section-header {
+	@apply ts:fixed ts:top-0 ts:left-0 ts:w-full;
+}
+body.index-page .section-header:not(.scrolled-past-header, .menu-open) > sticky-header {
+    --gradient-background: linear-gradient(180deg, rgba(0, 0, 0, 0.20) 33%, rgba(199, 199, 199, 0.20) 211%);
+		--color-foreground: var(--color-background);
+}
+body.index-page .section-header .header__search .search-modal {
+	--gradient-background: rgba(var(--color-background));
+	--color-foreground: var(--color-button);
+}
+
+@media only screen and (min-width: 990px) {
+	body.index-page .section-header:not(.scrolled-past-header, .menu-open) > sticky-header {
+    --gradient-background: transparent;
+	}
+}

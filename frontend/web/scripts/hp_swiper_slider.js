@@ -62,12 +62,22 @@ class SwiperSlider extends HTMLElement {
 
     if (this.isWaitingForConfig) return; // Wait until config is set
 
+    // Handle destroy-on-mobile: destroy swiper on mobile, show grid
     if (isMobile && this.hasAttribute('destroy-on-mobile')) {
       if (this.swiperInstance) {
         this.destroySwiper();
       }
       this.classList.add('grid-view');
-    } else {
+    }
+    // Handle destroy-on-desktop: destroy swiper on desktop, show grid
+    else if (!isMobile && this.hasAttribute('destroy-on-desktop')) {
+      if (this.swiperInstance) {
+        this.destroySwiper();
+      }
+      this.classList.add('grid-view-desktop');
+    }
+    // Otherwise, initialize swiper
+    else {
       if (!this.swiperInstance || forceRecheck) {
         this.classList.remove('grid-view');
         this.initializeSwiper(this._config);
