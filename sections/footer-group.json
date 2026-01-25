@@ -13,19 +13,56 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "image_PtHpUC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/footer_logo.png",
+            "image_width": 175,
+            "alignment": "center"
+          }
+        },
+        "link_list_G9LbW8": {
+          "type": "link_list",
+          "settings": {
+            "heading": "COMPANY",
+            "menu": "footer-company"
+          }
+        },
+        "link_list_ii9VhV": {
+          "type": "link_list",
+          "settings": {
+            "heading": "STORE INFO",
+            "menu": "footer-store-info"
+          }
+        },
+        "link_list_JmDUip": {
+          "type": "link_list",
+          "settings": {
+            "heading": "STORE Policies",
+            "menu": "footer-main-menu-2"
+          }
+        }
+      },
+      "block_order": [
+        "image_PtHpUC",
+        "link_list_G9LbW8",
+        "link_list_ii9VhV",
+        "link_list_JmDUip"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
-        "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "payment_enable": true,
-        "show_policy": true,
+        "newsletter_heading": "SIGN UP TO GET HIP",
+        "enable_follow_on_shop": false,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": false,
+        "show_policy": false,
         "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 28,
+        "padding_bottom": 40
       }
     }
   },

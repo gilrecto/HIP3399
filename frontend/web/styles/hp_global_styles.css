@@ -11,7 +11,7 @@
 	@apply ts:xl:py-(--padding-xl) ts:lg:py-(--padding-lg) ts:md:py-(--padding-md) ts:py-(--padding-sm) ts:px-0 ts:overflow-hidden;
 }
 .button {
-	@apply ts:lg:text-lg ts:text-base ts:leading-none ts:md:min-w-124 ts:min-w-56 ts:hover:text-[rgba(var(--color-foreground))]! ts:hover:bg-[rgba(var(--color-background))]! ts:hover:after:shadow-none! ts:md:min-h-20;
+	@apply ts:lg:text-lg ts:text-base ts:leading-none ts:md:min-w-124 ts:min-w-90 ts:hover:text-[rgba(var(--color-foreground))]! ts:hover:bg-[rgba(var(--color-background))]! ts:md:min-h-20;
 }
 .btn-text-only {
 	@apply ts:text-sm! ts:uppercase ts:font-normal ts:inline ts:p-0 ts:bg-transparent ts:text-[rgba(var(--color-foreground))] ts:hover:font-bold ts:hover:underline ts:transition-all ts:duration-300 ts:ease-linear;
@@ -34,7 +34,10 @@ button, a, .button, .btn {
 	@apply ts:transition-all ts:duration-300 ts:ease-linear;
 }
 .section-header .header__menu-item,
-.section-header .header__icons {
+.section-header .header__icons,
+.section-header .menu-drawer .list-menu__item,
+.section-header .menu-drawer__account,
+.section-header .menu-drawer__localization {
 	@apply ts:text-[rgba(var(--color-foreground))] ts:font-heading ts:text-sm ts:uppercase;
 }
 .section-header .header__icons {
@@ -52,4 +55,20 @@ button, a, .button, .btn {
 swiper-slider,
 .swiper-controls {
 	--swiper-theme-color: rgba(var(--color-foreground));
+}
+swiper-slider .swiper-nav {
+	--swiper-navigation-sides-offset: -0.8rem;
+	--swiper-navigation-size: 3rem;
+}
+swiper-slider .swiper-nav:after {
+	@apply ts:font-bold;
+}
+swiper-slider .swiper-pagination {
+	--swiper-pagination-bottom: -2.5rem;
+}
+.product-card-wrapper .card__heading {
+	@apply ts:font-body ts:text-base
+}
+.product-card-wrapper .card__content .price {
+	@apply ts:text-sm ts:text-[rgba(var(--color-foreground),0.65)];
 }

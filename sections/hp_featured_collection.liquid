@@ -33,6 +33,15 @@
 		--padding-sm: {{ section.settings.pad_mob | append: 'px' }};
 	}
 
+  #shopify-section-{{ section.id }} .collection__title {
+    text-align: var(--title-align-mobile);
+  }
+
+  @media only screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} .collection__title {
+      text-align: var(--title-align-desktop);
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -67,8 +76,39 @@
   endif
 -%}
 
-<div class="color-{{ section.settings.color_scheme }} isolate gradient custom-section">
-  <div class="collection section-{{ section.id }}-padding page-width" id="collection-{{ section.id }}" data-id="{{ section.id }}">
+<div class="color-{{ section.settings.color_scheme }} isolate gradient{% unless section.settings.add_collection_image %} custom-section{% else %} ts:grid ts:lg:grid-cols-2 ts:grid-cols-1{% endunless %}">
+  {%- if section.settings.add_collection_image -%}
+   {%- liquid
+      assign image = section.settings.collection_image
+      assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+      assign image_class = 'motion-reduce ts:w-full ts:max-w-full ts:h-auto'
+      assign fetch_priority = 'auto'
+      assign mobile_image = image | image_url: width: image.width
+
+      if section.index == 1
+        assign fetch_priority = 'high'
+      endif
+
+      if setting.banner_img_mb != blank
+        assign mobile_image = section.settings.collection_image_mb | image_url: width: section.settings.collection_image_mb.width
+      endif
+    -%}
+
+    <div class="collection-image-wrapper ts:w-full ts:h-full ts:overflow-hidden ts:lg:aspect-(--aspect-ratio) ts:aspect-(--aspect-ratio-mb)"
+         style="--aspect-ratio: {{ image.aspect_ratio }};--aspect-ratio-mb: {{ section.settings.collection_image_mb.aspect_ratio }};"
+    >
+      <picture class="media ts:w-full ts:h-full">
+          <source srcset="{{ mobile_image }}" media="(max-width: 767px)"/>
+          {{
+            image
+            | image_url: width: 3840
+            | image_tag: height: image.height, sizes: sizes, widths: widths, fetchpriority: fetch_priority, class: image_class, alt: image.alt | default: 'Banner Image'
+          }}
+        </picture>
+    </div>
+  {%- endif -%}
+
+  <div class="collection section-{{ section.id }}-padding page-width{% if section.settings.add_collection_image %} custom-section{% endif %}" id="collection-{{ section.id }}" data-id="{{ section.id }}">
     
     {%- if section.settings.show_title -%}
       {%- liquid
@@ -79,7 +119,9 @@
       -%}
       
       {%- if title_text != blank -%}
-        <div class="collection__title title-wrapper title-wrapper--no-top-margin ts:text-{{ section.settings.title_align_desktop }} ts:max-md:text-{{ section.settings.title_align_mobile }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <div class="collection__title title-wrapper title-wrapper--no-top-margin {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+             style="--title-align-desktop: {{ section.settings.title_align_desktop }};--title-align-mobile: {{ section.settings.title_align_mobile }};"
+        >
           <h2 class="title {{ section.settings.title_size }} {{ section.settings.to_uppercase | replace: 'true', 'ts:uppercase'  }}">
             {{ title_text }}
           </h2>
@@ -89,6 +131,7 @@
 
     {%- if should_init_swiper -%}
       {%- liquid
+        assign autoplay_speed = section.settings.swiper_autoplay_speed | times: 1000
         assign swiper_config = '{'
         assign swiper_config = swiper_config | append: '"slidesPerView": ' | append: section.settings.swiper_slides_per_view_mob | append: ','
         assign swiper_config = swiper_config | append: '"spaceBetween": 10,'
@@ -104,7 +147,7 @@
         endif
 
         if section.settings.swiper_autoplay
-          assign swiper_config = swiper_config | append: '"autoplay": {"delay": ' | append: section.settings.swiper_autoplay_speed | append: ', "disableOnInteraction": false},'
+          assign swiper_config = swiper_config | append: '"autoplay": {"delay": ' | append: autoplay_speed | append: ', "disableOnInteraction": false},'
         endif
 
         assign swiper_config = swiper_config | append: '"breakpoints": {'
@@ -116,7 +159,7 @@
       -%}
 
       <swiper-slider
-        class="ts:w-full{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        class="ts:w-full{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} ts:relative"
         data-config='{{ swiper_config }}'
         {% if destroy_on_mobile %}destroy-on-mobile{% endif %}
         {% if destroy_on_desktop %}destroy-on-desktop{% endif %}
@@ -160,17 +203,18 @@
             {%- endif -%}
           </div>
 
-          {%- if section.settings.swiper_navigation -%}
-            <div class="swiper-controls{% if destroy_on_desktop %} ts:md:hidden{% endif %}{% if destroy_on_mobile %} ts:hidden{% endif %}">
-              <div class="swiper-button-prev">&nbsp;</div>
-              <div class="swiper-button-next">&nbsp;</div>
-            </div>
-          {%- endif -%}
-
-          {%- if section.settings.swiper_pagination -%}
-            <div class="swiper-pagination"></div>
-          {%- endif -%}
         </div>
+
+        {%- if section.settings.swiper_navigation -%}
+          <div class="swiper-controls{% if destroy_on_desktop %} ts:md:hidden{% endif %}{% if destroy_on_mobile %} ts:hidden{% endif %}">
+            <div class="swiper-nav swiper-button-prev">&nbsp;</div>
+            <div class="swiper-nav swiper-button-next">&nbsp;</div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.swiper_pagination -%}
+          <div class="swiper-pagination"></div>
+        {%- endif -%}
       </swiper-slider>
 
       <script>
@@ -188,7 +232,7 @@
       <div class="collection__view-all ts:lg:mt-40 ts:mt-30 ts:text-{{ section.settings.view_all_align_desktop }} ts:max-md:text-{{ section.settings.view_all_align_mobile }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <a
           href="{{ section.settings.collection.url }}"
-          class="button"
+          class="button ts:max-sm:w-full"
           aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title | escape }}"
         >
           {{ section.settings.view_all_text | default: 'View All' }}
@@ -213,21 +257,13 @@
   "settings": [
     {
       "type": "header",
-      "content": "Collection Settings"
+      "content": "Color Scheme"
     },
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show",
-      "min": 2,
-      "max": 25,
-      "step": 1,
-      "default": 8,
-      "label": "Products to Show"
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
     },
     {
       "type": "header",
@@ -314,7 +350,7 @@
     {
       "type": "select",
       "id": "title_align_desktop",
-      "label": "Title Alignment (Desktop)",
+      "label": "Alignment",
       "options": [
         {
           "value": "left",
@@ -330,12 +366,13 @@
         }
       ],
       "default": "center",
+      "info": "Desktop",
       "visible_if": "{{ section.settings.show_title == true }}"
     },
     {
       "type": "select",
       "id": "title_align_mobile",
-      "label": "Title Alignment (Mobile)",
+      "label": "Alignment",
       "options": [
         {
           "value": "left",
@@ -351,241 +388,46 @@
         }
       ],
       "default": "center",
+      "info": "Mobile",
       "visible_if": "{{ section.settings.show_title == true }}"
     },
     {
       "type": "header",
-      "content": "Layout Settings - Desktop"
+      "content": "Collection Settings"
     },
     {
-      "type": "select",
-      "id": "desktop_layout",
-      "label": "Desktop Layout",
-      "options": [
-        {
-          "value": "swiper",
-          "label": "Swiper Slider"
-        },
-        {
-          "value": "grid",
-          "label": "Static Grid"
-        }
-      ],
-      "default": "grid"
-    },
-    {
-      "type": "header",
-      "content": "Desktop Grid Columns",
-      "visible_if": "{{ section.settings.desktop_layout == 'grid' }}"
-    },
-    {
-      "type": "select",
-      "id": "desktop_columns",
-      "label": "Desktop Columns",
-      "options": [
-        {
-          "value": "5",
-          "label": "5"
-        },
-        {
-          "value": "4",
-          "label": "4"
-        },
-        {
-          "value": "3",
-          "label": "3"
-        },
-        {
-          "value": "2",
-          "label": "2"
-        }
-      ],
-      "default": "4",
-      "visible_if": "{{ section.settings.desktop_layout == 'grid' }}"
-    },
-    {
-      "type": "header",
-      "content": "Layout Settings - Mobile"
-    },
-    {
-      "type": "select",
-      "id": "mobile_layout",
-      "label": "Mobile Layout",
-      "options": [
-        {
-          "value": "swiper",
-          "label": "Swiper Slider"
-        },
-        {
-          "value": "grid",
-          "label": "Static Grid"
-        },
-
-      ],
-      "default": "grid"
-    },
-    {
-      "type": "header",
-      "content": "Mobile Grid Columns",
-      "visible_if": "{{ section.settings.mobile_layout == 'grid' }}"
-    },
-    {
-      "type": "select",
-      "id": "mobile_columns",
-      "label": " Columns",
-      "options": [
-        {
-          "value": "2",
-          "label": "2"
-        },
-        {
-          "value": "1",
-          "label": "1"
-        }
-      ],
-      "default": "2",
-      "visible_if": "{{ section.settings.mobile_layout == 'grid' }}"
-    },
-    {
-      "type": "header",
-      "content": "Swiper Settings",
-      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' }}"
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
     },
     {
       "type": "range",
-      "id": "swiper_slides_per_view",
-      "min": 1,
-      "max": 8,
+      "id": "products_to_show",
+      "min": 2,
+      "max": 25,
       "step": 1,
-      "label": "Slides Per View",
-      "default": 5,
-      "info": "Desktop",
-      "visible_if": "{{ section.settings.desktop_layout == 'swiper' }}"
-    },
-    {
-      "type": "range",
-      "id": "swiper_slides_per_view_tab",
-      "min": 1,
-      "max": 5,
-      "step": 0.1,
-      "label": "Slides Per View",
-      "default": 3,
-      "info": "Tablet",
-      "visible_if": "{{ section.settings.desktop_layout == 'swiper' }}"
-    },
-    {
-      "type": "range",
-      "id": "swiper_slides_per_view_mob",
-      "min": 1,
-      "max": 3,
-      "step": 0.1,
-      "label": "Slides Per View",
-      "default": 1,
-      "info": "Mobile",
-      "visible_if": "{{ section.settings.mobile_layout == 'swiper' }}"
-    },
-    {
-      "type": "range",
-      "id": "swiper_space_between",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "label": "Space Between Slides",
-      "default": 30,
-      "visible_if": "{{ section.settings.desktop_layout == 'swiper' }}"
+      "default": 8,
+      "label": "Products to Show"
     },
     {
       "type": "checkbox",
-      "id": "swiper_navigation",
-      "label": "Show Navigation Arrows",
-      "default": true,
-      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' }}"
+      "id": "add_collection_image",
+      "label": "Add Collection Image",
+      "default": false
     },
     {
-      "type": "checkbox",
-      "id": "swiper_pagination",
-      "label": "Show Pagination Dots",
-      "default": false,
-      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' }}"
+      "type": "image_picker",
+      "id": "collection_image",
+      "label": "Collection Image",
+      "visible_if": "{{ section.settings.add_collection_image == true }}",
+      "info": "Desktop"
     },
     {
-      "type": "checkbox",
-      "id": "swiper_autoplay",
-      "label": "Enable Autoplay",
-      "default": false,
-      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' }}"
-    },
-    {
-      "type": "range",
-      "id": "swiper_autoplay_speed",
-      "min": 100,
-      "max": 1000,
-      "step": 50,
-      "unit": "ms",
-      "label": "Autoplay Speed",
-      "default": 300,
-      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' and section.settings.swiper_autoplay == true }}"
-    },
-    {
-      "type": "header",
-      "content": "View All Button"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "label": "Show View All Button",
-      "default": true,
-      "info": "Only shows if collection has more products than displayed"
-    },
-    {
-      "type": "text",
-      "id": "view_all_text",
-      "label": "Button Text",
-      "default": "View All",
-      "visible_if": "{{ section.settings.show_view_all == true }}"
-    },
-    {
-      "type": "select",
-      "id": "view_all_align_desktop",
-      "label": "Button Alignment (Desktop)",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center",
-      "visible_if": "{{ section.settings.show_view_all == true }}"
-    },
-    {
-      "type": "select",
-      "id": "view_all_align_mobile",
-      "label": "Button Alignment (Mobile)",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "center",
-      "visible_if": "{{ section.settings.show_view_all == true }}"
+      "type": "image_picker",
+      "id": "collection_image_mb",
+      "label": "Collection Image",
+      "visible_if": "{{ section.settings.add_collection_image == true }}",
+      "info": "Mobile"
     },
     {
       "type": "header",
@@ -692,13 +534,238 @@
     },
     {
       "type": "header",
-      "content": "Color Scheme"
+      "content": "View All Button"
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color scheme",
-      "default": "scheme-1"
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show View All Button",
+      "default": true,
+      "info": "Only shows if collection has more products than displayed"
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "Button Text",
+      "default": "View All",
+      "visible_if": "{{ section.settings.show_view_all == true }}"
+    },
+    {
+      "type": "select",
+      "id": "view_all_align_desktop",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "info": "Desktop",
+      "visible_if": "{{ section.settings.show_view_all == true }}"
+    },
+    {
+      "type": "select",
+      "id": "view_all_align_mobile",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "info": "Mobile",
+      "visible_if": "{{ section.settings.show_view_all == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings - Desktop"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop Layout",
+      "options": [
+        {
+          "value": "swiper",
+          "label": "Swiper Slider"
+        },
+        {
+          "value": "grid",
+          "label": "Static Grid"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Grid Columns",
+      "visible_if": "{{ section.settings.desktop_layout == 'grid' }}"
+    },
+    {
+      "type": "select",
+      "id": "desktop_columns",
+      "label": "Desktop Columns",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
+      ],
+      "default": "4",
+      "visible_if": "{{ section.settings.desktop_layout == 'grid' }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings - Mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile Layout",
+      "options": [
+        {
+          "value": "swiper",
+          "label": "Swiper Slider"
+        },
+        {
+          "value": "grid",
+          "label": "Static Grid"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Grid Columns",
+      "visible_if": "{{ section.settings.mobile_layout == 'grid' }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": " Columns",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2",
+      "visible_if": "{{ section.settings.mobile_layout == 'grid' }}"
+    },
+    {
+      "type": "header",
+      "content": "Swiper Settings",
+      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' }}"
+    },
+    {
+      "type": "range",
+      "id": "swiper_slides_per_view",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "label": "Slides Per View",
+      "default": 5,
+      "info": "Desktop",
+      "visible_if": "{{ section.settings.desktop_layout == 'swiper' }}"
+    },
+    {
+      "type": "range",
+      "id": "swiper_slides_per_view_tab",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "label": "Slides Per View",
+      "default": 3,
+      "info": "Tablet",
+      "visible_if": "{{ section.settings.desktop_layout == 'swiper' }}"
+    },
+    {
+      "type": "range",
+      "id": "swiper_slides_per_view_mob",
+      "min": 1,
+      "max": 3,
+      "step": 0.1,
+      "label": "Slides Per View",
+      "default": 1,
+      "info": "Mobile",
+      "visible_if": "{{ section.settings.mobile_layout == 'swiper' }}"
+    },
+    {
+      "type": "range",
+      "id": "swiper_space_between",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Space Between Slides",
+      "default": 30,
+      "visible_if": "{{ section.settings.desktop_layout == 'swiper' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "swiper_navigation",
+      "label": "Show Navigation Arrows",
+      "default": true,
+      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "swiper_pagination",
+      "label": "Show Pagination Dots",
+      "default": false,
+      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "swiper_autoplay",
+      "label": "Enable Autoplay",
+      "default": false,
+      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' }}"
+    },
+    {
+      "type": "range",
+      "id": "swiper_autoplay_speed",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "sec",
+      "label": "Autoplay Speed",
+      "default": 3,
+      "visible_if": "{{ section.settings.desktop_layout == 'swiper' or section.settings.mobile_layout == 'swiper' and section.settings.swiper_autoplay == true }}"
     },
     {
       "type": "header",
