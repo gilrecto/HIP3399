@@ -50,10 +50,12 @@
         "link_list_ii9VhV",
         "link_list_JmDUip"
       ],
+      "custom_css": [],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
         "newsletter_heading": "SIGN UP TO GET HIP",
+        "newsletter_subheading": "<p>New Collections, Pre-Orders, & Events</p>",
         "enable_follow_on_shop": false,
         "show_social": false,
         "enable_country_selector": false,
@@ -61,8 +63,8 @@
         "payment_enable": false,
         "show_policy": false,
         "margin_top": 0,
-        "padding_top": 28,
-        "padding_bottom": 40
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     }
   },
