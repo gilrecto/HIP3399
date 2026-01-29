@@ -133,7 +133,7 @@ footer .footer__content-bottom .footer__copyright a:hover {
 /* Collection page styles */
 .collection-page .facets-wrapper,
 .collection-page .collection {
-	@apply ts:max-[750px]:max-w-[96.956%];
+	@apply ts:min-[750px]:max-w-[96.956%];
 }
 .collection-page .facets-wrapper {
 	@apply ts:md:mb-10 ts:mb-8;
