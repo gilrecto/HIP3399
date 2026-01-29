@@ -129,3 +129,35 @@ footer .footer__content-bottom .footer__copyright {
 footer .footer__content-bottom .footer__copyright a:hover {
 	@apply ts:text-[rgba(var(--color-background),0.6)];
 }
+
+/* Collection page styles */
+.collection-page .facets-wrapper,
+.collection-page .collection {
+	@apply ts:max-[750px]:max-w-[96.956%];
+}
+.collection-page .facets-wrapper {
+	@apply ts:md:mb-10 ts:mb-8;
+}
+.collection-page aside.facets-wrapper:has(.collection-name-wrapper) {
+	@apply ts:flex ts:items-center ts:justify-between;
+}
+.collection-page aside.facets-wrapper:has(.collection-name-wrapper) .collection-name {
+	@apply ts:font-normal ts:text-sm ts:uppercase;
+}
+.collection-page aside.facets-wrapper:has(.collection-name-wrapper) .facets-container {
+	@apply ts:p-0;
+}
+.collection-page aside.facets-wrapper:has(.collection-name-wrapper) .mobile-facets__wrapper,
+.collection-page aside.facets-wrapper:has(.collection-name-wrapper) .active-facets {
+	@apply ts:justify-end ts:mr-0;
+}
+.collection-page .facets-wrapper .mobile-facets__open .svg-wrapper {
+	@apply ts:w-5 ts:h-5 ts:ml-4;
+}
+.collection-page .collection .grid {
+  --grid-desktop-horizontal-spacing: calc(clamp(1.5rem, 2.991vw - 0.744rem, 5rem));
+  --grid-desktop-vertical-spacing: calc(clamp(6rem, 7.265vw + 0.551rem, 14.5rem));
+}
+.collection-page .product-card-wrapper .card .media {
+	@apply ts:bg-lightgray;
+}
