@@ -36,6 +36,7 @@
         "enable_filtering": true,
         "filter_type": "drawer",
         "enable_sorting": false,
+        "pagination_type": "load_more",
         "padding_top": 100,
         "padding_bottom": 100
       }

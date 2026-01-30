@@ -1,0 +1,35 @@
+/* Collection Pagination Styles */
+
+.collection-load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: calc(clamp(5rem, 1.823vw + 5rem, 8.5rem));
+}
+
+.collection-load-more .load-more-button .loading-spinner {
+  display: inline-block;
+}
+
+.collection-load-more .load-more-button.loading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.collection-load-more .load-more-button .hidden {
+  display: none;
+}
+
+.collection-infinite-scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  min-height: 60px;
+}
+
+.collection-infinite-scroll .loading-spinner {
+  display: inline-block;
+}
+

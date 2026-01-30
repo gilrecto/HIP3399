@@ -1,6 +1,7 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'collection-pagination.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -22,6 +23,10 @@
   <script src="{{ 'quick-order-list.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
+{%- if section.settings.pagination_type == 'infinite' or section.settings.pagination_type == 'load_more' -%}
+  <script src="{{ 'collection-pagination.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -37,7 +42,14 @@
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
-  {%- paginate collection.products by section.settings.products_per_page -%}
+  {% liquid
+    assign product_per_page = section.settings.products_per_page
+
+    if section.settings.pagination_type == 'none'
+      assign product_per_page = collection.products_count
+    endif
+  %}
+  {%- paginate collection.products by product_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
@@ -152,6 +164,8 @@
             <ul
               id="product-grid"
               data-id="{{ section.id }}"
+              data-pagination-type="{{ section.settings.pagination_type }}"
+              data-quick-add="{{ section.settings.quick_add }}"
               class="
                 grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
                 grid--{{ section.settings.columns_desktop }}-col-desktop
@@ -189,7 +203,24 @@
             </ul>
 
             {%- if paginate.pages > 1 -%}
-              {% render 'pagination', paginate: paginate, anchor: '' %}
+              {%- if section.settings.pagination_type == 'default' -%}
+                {% render 'pagination', paginate: paginate, anchor: '' %}
+              {%- elsif section.settings.pagination_type == 'load_more' -%}
+                <div class="collection-load-more" data-next-url="{{ paginate.next.url }}">
+                  <button type="button" class="button button--primary load-more-button ts:uppercase ts:text-lg ts:max-sm:w-full">
+                    <span class="load-more-text">VIEW more</span>
+                    <div class="loading-spinner hidden">
+                      {%- render 'loading-spinner' -%}
+                    </div>
+                  </button>
+                </div>
+              {%- elsif section.settings.pagination_type == 'infinite' -%}
+                <div class="collection-infinite-scroll" data-next-url="{{ paginate.next.url }}">
+                  <div class="loading-spinner">
+                    {%- render 'loading-spinner' -%}
+                  </div>
+                </div>
+              {%- endif -%}
             {%- endif -%}
           </div>
         {%- endif -%}
@@ -213,7 +244,8 @@
       "max": 36,
       "step": 4,
       "default": 16,
-      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label",
+      "visible_if": "{{ section.settings.pagination_type != 'none' }}"
     },
     {
       "type": "range",
@@ -392,6 +424,35 @@
       "id": "enable_sorting",
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+    },
+    {
+      "type": "header",
+      "content": "Pagination Settings"
+    },
+    {
+      "type": "select",
+      "id": "pagination_type",
+      "options": [
+        {
+          "value": "default",
+          "label": "Normal Pagination"
+        },
+        {
+          "value": "infinite",
+          "label": "Infinite Scroll"
+        },
+        {
+          "value": "load_more",
+          "label": "Load More Button"
+        },
+        {
+          "value": "none",
+          "label": "Show All Products"
+        }
+      ],
+      "default": "default",
+      "label": "Pagination Type",
+      "info": "Choose how products are loaded on the collection page"
     },
     {
       "type": "header",
