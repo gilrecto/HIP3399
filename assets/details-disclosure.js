@@ -51,3 +51,32 @@ class HeaderMenu extends DetailsDisclosure {
 }
 
 customElements.define('header-menu', HeaderMenu);
+
+let menuItem = document.querySelectorAll(".list-menu .header__menu-item"),
+    header_wrapper = document.querySelector(".header-wrapper");
+
+menuItem.forEach(item => {
+  let details = item.closest("details"),
+    content = item.nextElementSibling;
+  
+  item.addEventListener("mouseenter", event => {
+    let detailsAll = document.querySelectorAll("details.mega-menu")
+    
+    detailsAll.forEach(detail => {
+      detail.removeAttribute("open");
+    })
+    details?.setAttribute("open", "open");
+    if (details !== null) {
+      header_wrapper.classList.add("header--mega-menu-open");
+    } else {
+      header_wrapper.classList.remove("header--mega-menu-open");
+    }
+  });
+
+  if (content !== null) {
+    content.addEventListener("mouseleave", event => {
+      event.target.parentElement.removeAttribute("open");
+      header_wrapper.classList.remove("header--mega-menu-open");
+    });
+  }
+});

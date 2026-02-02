@@ -30,43 +30,80 @@
                 class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
                 tabindex="-1"
               >
-                <ul
-                  class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
-                  role="list"
-                >
-                  {%- for childlink in link.links -%}
-                    <li>
-                      <a
-                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                        href="{{ childlink.url }}"
-                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
-                        {% if childlink.current %}
-                          aria-current="page"
+                <div class="page-width ts:flex ts:justify-between ts:gap-x-10">
+                  <ul class="mega-menu__list{% if link.levels == 1 %} mega-menu__list--condensed{% endif %} ts:flex-1" role="list">
+                    {%- for childlink in link.links -%}
+                      <li>
+                        <a
+                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                          href="{{ childlink.url }}"
+                          class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                          {% if childlink.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{ childlink.title | escape }}
+                        </a>
+                        {%- if childlink.links != blank -%}
+                          <ul class="list-unstyled" role="list">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a
+                                  id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                  href="{{ grandchildlink.url }}"
+                                  class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                  {% if grandchildlink.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+
+                  {%- if section.blocks.size > 0 -%}
+                    <div class="mega-menu-blocks ts:flex-auto ts:flex ts:justify-end ts:xl:gap-x-20 ts:gap-x-10">
+                      {%- for block in section.blocks -%}
+                        {% if block.type == 'mega_menu_block' %}
+                          <div class="mega-menu-block ts:flex-[0_0_23rem]">
+                            <a href="{{ block.settings.mega_menu_link | default: '#' }}" class="ts:group">
+                              {%- if block.settings.mega_menu_image != blank -%}
+                                {%- liquid
+                                  assign image = block.settings.mega_menu_image
+                                  assign widths = '100, 150, 180, 200, 230, 250'
+                                  assign sizes = '100vw'
+                                  assign image_class = 'motion-reduce ts:w-full ts:max-w-full ts:h-autot ts:group-hover:scale-115 ts:transition-all! ts:duration-300! ts:ease-linear!'
+                                  assign fetch_priority = 'auto'
+                                -%}
+
+                                <div class="img-wrapper ts:w-full ts:overflow-hidden ts:aspect-(--aspect-ratio)" style="--aspect-ratio: {{ image.aspect_ratio }};">
+                                  <div class="media ts:w-full ts:h-full">
+                                    {{
+                                      image
+                                      | image_url: width: 230
+                                      | image_tag: height: image.height, sizes: sizes, widths: widths, fetchpriority: fetch_priority, class: image_class, alt: image.alt | default: 'Mega Menu Image'
+                                    }}
+                                  </div>
+                                </div>
+                              {%- endif -%}
+
+                              {%- if block.settings.mega_menu_text != blank -%}
+                                <h3 class="ts:font-body! ts:text-sm! ts:mt-3.5 ts:group-hover:underline">
+                                  {{ block.settings.mega_menu_text }}
+                                </h3>
+                              {%- endif -%}
+                            </a>
+                          </div>
                         {% endif %}
-                      >
-                        {{ childlink.title | escape }}
-                      </a>
-                      {%- if childlink.links != blank -%}
-                        <ul class="list-unstyled" role="list">
-                          {%- for grandchildlink in childlink.links -%}
-                            <li>
-                              <a
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                href="{{ grandchildlink.url }}"
-                                class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      {%- endif -%}
-                    </li>
-                  {%- endfor -%}
-                </ul>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+                </div>
               </div>
             </details>
           </header-menu>

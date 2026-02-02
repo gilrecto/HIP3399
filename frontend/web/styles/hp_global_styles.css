@@ -33,12 +33,25 @@ button, a, .button, .btn {
 .section-header > sticky-header {
 	@apply ts:transition-all ts:duration-300 ts:ease-linear;
 }
+.section-header > .header-wrapper.header--mega-menu-open {
+	--gradient-background: rgb(var(--color-background), 0.9);
+}
+.section-header > .header-wrapper.header--mega-menu-open .mega-menu__content {
+	@apply ts:bg-[rgba(var(--color-background),0.9)] ts:border-0;
+}
+.section-header > .header-wrapper details[open] > .header__menu-item {
+	@apply ts:no-underline
+}
 .section-header .header__menu-item,
 .section-header .header__icons,
 .section-header .menu-drawer .list-menu__item,
+.section-header .mega-menu .mega-menu__link,
 .section-header .menu-drawer__account,
 .section-header .menu-drawer__localization {
 	@apply ts:text-[rgba(var(--color-foreground))] ts:font-heading ts:text-sm ts:uppercase;
+}
+.section-header .mega-menu .mega-menu__link {
+	@apply ts:py-[0.4rem];
 }
 .section-header .header__icons {
 	@apply ts:xl:gap-x-10;

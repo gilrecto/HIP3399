@@ -38,6 +38,28 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "mega_menu_block_phgLjL": {
+          "type": "mega_menu_block",
+          "settings": {
+            "mega_menu_image": "shopify://shop_images/mega_menu_tshirt.jpg",
+            "mega_menu_text": "HIP3399 T-SHIRT",
+            "mega_menu_link": "shopify://collections/t-shirts"
+          }
+        },
+        "mega_menu_block_zF4Dq6": {
+          "type": "mega_menu_block",
+          "settings": {
+            "mega_menu_image": "shopify://shop_images/mega_menu_outwear.jpg",
+            "mega_menu_text": "HIP3399 OUTWEAR",
+            "mega_menu_link": "shopify://collections/outerwear"
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_block_phgLjL",
+        "mega_menu_block_zF4Dq6"
+      ],
       "settings": {
         "logo_position": "middle-center",
         "mobile_logo_position": "center",

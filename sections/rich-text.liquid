@@ -22,11 +22,13 @@
           {%- case block.type -%}
             {%- when 'heading' -%}
               <h2
-                class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="rich-text__heading rte inline-richtext text-align {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} {{ block.settings.to_uppercase | replace: 'true', 'uppercase' }}"
                 {{ block.shopify_attributes }}
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
-                  style="--animation-order: {{ forloop.index }};"
+                  style="--animation-order: {{ forloop.index }}; --text-align: {{ block.settings.text_alignment }};"
+                {% else %}
+                    style="--text-align: {{ block.settings.text_alignment }};"
                 {% endif %}
               >
                 {{ block.settings.heading }}
@@ -86,6 +88,47 @@
                     {{- block.settings.button_label_2 | escape -}}
                   </a>
                 {%- endif -%}
+              </div>
+          
+            {%- when 'image' -%}
+              <div
+                class="rich-text__image{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                
+                {%- liquid
+                  assign image = block.settings.image
+                  assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                  assign image_class = 'motion-reduce ts:w-full ts:max-w-full ts:h-auto'
+                  assign fetch_priority = 'auto'
+                  assign mobile_image = image | image_url: width: image.width
+                  assign mobile_aspect_ratio = image.aspect_ratio
+                  assign sizes = '100vw'
+
+                  if section.index == 1
+                    assign fetch_priority = 'high'
+                  endif
+
+                  if block.settings.image_mb != blank
+                    assign mobile_image = block.settings.image_mb | image_url: width: block.settings.image_mb.width
+                    assign mobile_aspect_ratio = block.settings.image_mb.aspect_ratio
+                  endif
+                -%}
+
+                <div class="img-wrapper ts:w-full ts:h-full ts:overflow-hidden ts:md:aspect-(--aspect-ratio) ts:aspect-(--aspect-ratio-mobile)" style="--aspect-ratio: {{ image.aspect_ratio }}; --aspect-ratio-mobile: {{ mobile_aspect_ratio }};">
+                  <picture class="media ts:w-full ts:h-full">
+                    <source srcset="{{ mobile_image }}" media="(max-width: 767px)"/>
+                    {{
+                      image
+                      | image_url: width: 3840
+                      | image_tag: height: image.height, sizes: sizes, widths: widths, fetchpriority: fetch_priority, class: image_class, alt: image.alt | default: 'Richtext Image'
+                    }}
+                  </picture>
+                </div>
               </div>
           {%- endcase -%}
         {%- endfor -%}
@@ -195,30 +238,54 @@
         {
           "type": "select",
           "id": "heading_size",
+          "label": "Heading Size",
           "options": [
             {
-              "value": "h2",
-              "label": "t:sections.all.heading_size.options__1.label"
+              "value": "ts:!text-big",
+              "label": "Big"
             },
             {
-              "value": "h1",
-              "label": "t:sections.all.heading_size.options__2.label"
+              "value": "ts:!text-3xl",
+              "label": "3X Large"
             },
             {
-              "value": "h0",
-              "label": "t:sections.all.heading_size.options__3.label"
+              "value": "ts:!text-2xl",
+              "label": "2X Large"
             },
             {
-              "value": "hxl",
-              "label": "t:sections.all.heading_size.options__4.label"
+              "value": "ts:!text-xl",
+              "label": "Extra Large"
             },
             {
-              "value": "hxxl",
-              "label": "t:sections.all.heading_size.options__5.label"
+              "value": "ts:!text-lg",
+              "label": "Large"
+            },
+            {
+              "value": "ts:!text-base",
+              "label": "Medium"
+            },
+            {
+              "value": "ts:!text-sm",
+              "label": "Small"
+            },
+            {
+              "value": "ts:!text-xs",
+              "label": "Extra Small"
             }
           ],
-          "default": "h1",
-          "label": "t:sections.all.heading_size.label"
+          "default": "ts:!text-2xl"
+        },
+        {
+          "type": "checkbox",
+          "id": "to_uppercase",
+          "label": "Uppercase",
+          "default": false
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_alignment",
+          "label": "Text Alignment",
+          "default": "center"
         }
       ]
     },
@@ -331,6 +398,24 @@
           "id": "button_style_secondary_2",
           "default": false,
           "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_2.label"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mb",
+          "label": "Image",
+          "info": "Mobile"
         }
       ]
     }

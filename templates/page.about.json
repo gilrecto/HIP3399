@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_Njyz9x": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_LpYWKX": {
+          "type": "heading",
+          "settings": {
+            "heading": "About us",
+            "heading_size": "ts:!text-xl",
+            "to_uppercase": true,
+            "text_alignment": "center"
+          }
+        },
+        "image_7cVQY3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/about_img.jpg",
+            "image_mb": "shopify://shop_images/about_img_mob.jpg"
+          }
+        },
+        "text_qijeQa": {
+          "type": "text",
+          "settings": {
+            "text": "<p>For <strong>Marco Wilson</strong>, football isn't just a career it's a masterclass in discipline, strategy, and execution. But behind the helmet is another identity: designer, creative, and storyteller. With <strong>HIP.3399</strong>, <strong>Marco merges</strong> the world of sports and fashion, channeling the precision, grit, and work ethic of a pro athlete into American-made garments designed with global inspiration.<br/><br/>HIP stands for \"Happiness Is Priority\" and was born during a pivotal chapter in Marco's life, when the pursuit of joy and authenticity became as important as any game-winning play. Every collection reflects this ethos, combining Japanese cultural influence, 90s cartoon nostalgia, and streetwear sensibilities into pieces that are as intentional as they are stylish.<br/><br/>In an industry where speed often sacrifices quality, HIP.3399 stands apart. Every piece is crafted and made in the U.S., with attention to detail that mirrors the focus Marco brings to the field. It's a brand for those who play hard, live creatively, and refuse to choose between performance and personal style.<br/><br/>Marco's vision reaches beyond clothing. He sees HIP.3399 as a platform, a runway into new creative arenas, from multimedia storytelling to global pop-up events that inspires others to chase their passions with the same dedication it takes to be a professional athlete.<br/><br/>In both fashion and football, Marco Wilson is proving that greatness comes when you play the game your own way.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LpYWKX",
+        "image_7cVQY3",
+        "text_qijeQa"
+      ],
+      "custom_css": [
+        ".rich-text__wrapper {width: 100%;}",
+        ".rich-text {padding-bottom: calc(clamp(16.5rem, 2.083vw + 16.5rem, 20.5rem));}",
+        ".rich-text__blocks {max-width: 83rem;}",
+        ".rich-text__image {margin-top: clamp(1.2rem, 1.8vw, 3rem);}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": false,
+        "padding_top": 64,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "rich_text_Njyz9x"
+  ]
+}
