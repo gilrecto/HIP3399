@@ -3,5 +3,5 @@
 }
 
 .related-products__heading {
-  margin: 0 0 3rem;
+  margin: 0 0 clamp(3.5rem, 1.302vw + 3.5rem, 6rem);
 }
