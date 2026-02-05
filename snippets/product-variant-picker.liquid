@@ -10,6 +10,7 @@
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
   <variant-selects
+    class="{{ block.settings.show_divider | replace: 'true', 'show-divider' }}"
     id="variant-selects-{{ section.id }}"
     data-section="{{ section.id }}"
     {{ block.shopify_attributes }}
@@ -43,8 +44,8 @@
           %}
         </fieldset>
       {%- elsif picker_type == 'button' -%}
-        <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
+        <fieldset class="js product-form__input product-form__input--pill ts:grid {% if option_color %}ts:grid-cols-2{% else %}ts:grid-cols-5{% endif %} ts:gap-x-4 ts:gap-y-6 ts:max-w-200!">
+          <legend class="form__label ts:col-span-6 ts:w-full">{{ option.name }}</legend>
           {% render 'product-variant-options',
             product: product,
             option: option,

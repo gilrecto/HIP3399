@@ -1,0 +1,17 @@
+.product .product-form__input .form__label {
+	@apply ts:text-base ts:leading-none ts:mb-4! ts:uppercase;
+}
+.product .product-form__input--pill input[type=radio] + label {
+	@apply ts:border-[rgba(var(--color-foreground),0.5)];
+}
+.product .product-form__input--pill input[type=radio]:checked + label,
+.product .product-form__input--pill input[type=radio].disabled:checked + label {
+	@apply ts:bg-transparent ts:text-[rgba(var(--color-button))] ts:border-[rgba(var(--color-button))];
+}
+.product .product-form__input--pill input[type=radio].disabled + label {
+	@apply ts:border-[rgba(var(--color-foreground),0.5)] ts:no-underline ts:text-[rgba(var(--color-foreground),0.5)]!;
+}
+.product .product-form__input--pill input[type=radio].disabled + label:after {
+	@apply ts:content-[""] ts:w-full ts:h-full ts:absolute ts:top-0 ts:left-0;
+	background: linear-gradient(to top right, transparent calc(50% - 1px), rgba(var(--color-foreground), 0.5), transparent calc(50% + 1px));
+}

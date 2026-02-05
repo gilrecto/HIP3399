@@ -14,28 +14,36 @@
       "blocks": {
         "title": {
           "type": "title",
-          "settings": {}
+          "settings": {
+            "show_divider": false
+          }
         },
         "price": {
           "type": "price",
-          "settings": {}
+          "settings": {
+            "show_divider": false
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
-            "swatch_shape": "circle"
+            "swatch_shape": "circle",
+            "show_divider": false
           }
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {}
+          "settings": {
+            "show_divider": true
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
+            "show_gift_card_recipient": true,
+            "show_divider": false
           }
         },
         "collapsible_tab_b7TkeG": {
@@ -75,6 +83,10 @@
         "collapsible_tab_b7TkeG",
         "collapsible_tab_x4KR63",
         "collapsible_tab_CGBHCR"
+      ],
+      "custom_css": [
+        "form.installment {padding-bottom: 2rem; border-bottom: 0.1rem solid rgba(var(--color-foreground));}",
+        ".product-form__quantity {margin-top: calc(clamp(4rem, 1.563vw + 4rem, 7rem));}"
       ],
       "settings": {
         "enable_sticky_info": true,
