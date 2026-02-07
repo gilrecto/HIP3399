@@ -15,6 +15,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'component-horizontal-tabs.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -23,6 +24,9 @@
   {% endunless %}
   {%- if product.quantity_price_breaks_configured? -%}
     {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+  {%- if section.settings.enable_breadcrumbs -%}
+    {{ 'component-breadcrumbs.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
 
   {%- style -%}
@@ -41,6 +45,7 @@
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'horizontal-tabs.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
     <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
@@ -73,6 +78,11 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+
+  {%- if section.settings.enable_breadcrumbs -%}
+    {% render 'breadcrumbs' %}
+  {%- endif -%}
+
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
@@ -227,6 +237,63 @@
                     </div>
                   </details>
                 </div>
+              {%- when 'horizontal_tab' -%}
+                {%- comment -%} Collect all consecutive horizontal_tab blocks and render them as a group {%- endcomment -%}
+                {%- assign current_index = forloop.index0 -%}
+                {%- assign should_render = true -%}
+
+                {%- comment -%} Check if previous block was also a horizontal_tab {%- endcomment -%}
+                {%- if current_index > 0 -%}
+                  {%- assign prev_index = current_index | minus: 1 -%}
+                  {%- for b in section.blocks -%}
+                    {%- if forloop.index0 == prev_index and b.type == 'horizontal_tab' -%}
+                      {%- assign should_render = false -%}
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+
+                {%- if should_render -%}
+                  {%- comment -%} Render the grouped horizontal tabs starting from current position {%- endcomment -%}
+                  <div class="product__horizontal-tabs quick-add-hidden">
+                    <div class="horizontal-tabs__header">
+                      {%- for tab in section.blocks -%}
+                        {%- assign tab_index = forloop.index0 -%}
+                        {%- if tab_index >= current_index and tab.type == 'horizontal_tab' -%}
+                          <button
+                            type="button"
+                            class="horizontal-tabs__button{% if tab_index == current_index %} active{% endif %}"
+                            data-tab-target="tab-{{ tab.id }}"
+                            {{ tab.shopify_attributes }}
+                          >
+                            {{ tab.settings.heading | default: tab.settings.page.title | escape }}
+                          </button>
+                        {%- elsif tab_index > current_index -%}
+                          {%- break -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                    <div class="horizontal-tabs__content">
+                      {%- for tab in section.blocks -%}
+                        {%- assign tab_index = forloop.index0 -%}
+                        {%- if tab_index >= current_index and tab.type == 'horizontal_tab' -%}
+                          <div
+                            id="tab-{{ tab.id }}"
+                            class="horizontal-tabs__panel{% if tab_index == current_index %} active{% endif %}"
+                            role="tabpanel"
+                          >
+                            <div class="rte">
+                              {{ tab.settings.content }}
+                              {{ tab.settings.page.content }}
+                            </div>
+                          </div>
+                        {%- elsif tab_index > current_index -%}
+                          {%- break -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                {%- endif -%}
               {%- when 'quantity_selector' -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
@@ -1227,6 +1294,29 @@
       ]
     },
     {
+      "type": "horizontal_tab",
+      "name": "Horizontal Tab",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Tab Heading",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+        }
+      ]
+    },
+    {
       "type": "popup",
       "name": "t:sections.main-product.blocks.popup.name",
       "settings": [
@@ -2182,6 +2272,12 @@
       "default": "scheme-1"
     },
     {
+      "type": "checkbox",
+      "id": "enable_breadcrumbs",
+      "default": false,
+      "label": "Enable Breadcrumbs"
+    },
+    {
       "type": "header",
       "content": "t:sections.main-product.settings.header.content"
     },
@@ -2246,6 +2342,10 @@
         {
           "value": "thumbnail_slider",
           "label": "t:sections.main-product.settings.gallery_layout.options__4.label"
+        },
+        {
+          "value": "thumbnail_right",
+          "label": "Thumbnails on Right"
         }
       ],
       "default": "stacked",

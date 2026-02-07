@@ -1,0 +1,142 @@
+{% comment %}
+  Renders breadcrumbs navigation
+  
+  Usage:
+  {% render 'breadcrumbs' %}
+{% endcomment %}
+
+{%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+  {%- assign t = template | split: '.' | first -%}
+
+  <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
+    <div class="page-width">
+      <ol class="breadcrumbs__list" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a href="{{ routes.root_url }}" class="breadcrumbs__link" itemprop="item">
+            <span itemprop="name">{{ 'general.breadcrumbs.home' | t }}</span>
+          </a>
+          <meta itemprop="position" content="1" />
+        </li>
+
+        {%- case t -%}
+          {%- when 'product' -%}
+            {%- if collection -%}
+              <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span class="breadcrumbs__separator" aria-hidden="true">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+                <a href="{{ collection.url }}" class="breadcrumbs__link" itemprop="item">
+                  <span itemprop="name">{{ collection.title }}</span>
+                </a>
+                <meta itemprop="position" content="2" />
+              </li>
+              <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span class="breadcrumbs__separator" aria-hidden="true">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+                <span class="breadcrumbs__link breadcrumbs__link--active" itemprop="item">
+                  <span itemprop="name">{{ product.title }}</span>
+                </span>
+                <meta itemprop="position" content="3" />
+              </li>
+            {%- elsif product.collections.size > 0 -%}
+              {%- assign first_collection = product.collections | first -%}
+              <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span class="breadcrumbs__separator" aria-hidden="true">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+                <a href="{{ first_collection.url }}" class="breadcrumbs__link" itemprop="item">
+                  <span itemprop="name">{{ first_collection.title }}</span>
+                </a>
+                <meta itemprop="position" content="2" />
+              </li>
+              <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span class="breadcrumbs__separator" aria-hidden="true">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+                <span class="breadcrumbs__link breadcrumbs__link--active" itemprop="item">
+                  <span itemprop="name">{{ product.title }}</span>
+                </span>
+                <meta itemprop="position" content="3" />
+              </li>
+            {%- else -%}
+              <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span class="breadcrumbs__separator" aria-hidden="true">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+                <span class="breadcrumbs__link breadcrumbs__link--active" itemprop="item">
+                  <span itemprop="name">{{ product.title }}</span>
+                </span>
+                <meta itemprop="position" content="2" />
+              </li>
+            {%- endif -%}
+
+          {%- when 'collection' -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <span class="breadcrumbs__separator" aria-hidden="true">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+              <span class="breadcrumbs__link breadcrumbs__link--active" itemprop="item">
+                <span itemprop="name">{{ collection.title }}</span>
+              </span>
+              <meta itemprop="position" content="2" />
+            </li>
+
+          {%- when 'blog' -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <span class="breadcrumbs__separator" aria-hidden="true">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+              <span class="breadcrumbs__link breadcrumbs__link--active" itemprop="item">
+                <span itemprop="name">{{ blog.title }}</span>
+              </span>
+              <meta itemprop="position" content="2" />
+            </li>
+
+          {%- when 'article' -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <span class="breadcrumbs__separator" aria-hidden="true">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+              <a href="{{ blog.url }}" class="breadcrumbs__link" itemprop="item">
+                <span itemprop="name">{{ blog.title }}</span>
+              </a>
+              <meta itemprop="position" content="2" />
+            </li>
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <span class="breadcrumbs__separator" aria-hidden="true">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+              <span class="breadcrumbs__link breadcrumbs__link--active" itemprop="item">
+                <span itemprop="name">{{ article.title }}</span>
+              </span>
+              <meta itemprop="position" content="3" />
+            </li>
+
+          {%- when 'page' -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <span class="breadcrumbs__separator" aria-hidden="true">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+              <span class="breadcrumbs__link breadcrumbs__link--active" itemprop="item">
+                <span itemprop="name">{{ page.title }}</span>
+              </span>
+              <meta itemprop="position" content="2" />
+            </li>
+
+          {%- else -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <span class="breadcrumbs__separator" aria-hidden="true">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+              <span class="breadcrumbs__link breadcrumbs__link--active" itemprop="item">
+                <span itemprop="name">{{ page_title }}</span>
+              </span>
+              <meta itemprop="position" content="2" />
+            </li>
+        {%- endcase -%}
+      </ol>
+    </div>
+  </nav>
+{%- endunless -%}
+

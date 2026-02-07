@@ -79,7 +79,20 @@ if (!customElements.get('media-gallery')) {
         thumbnail.querySelector('button').setAttribute('aria-current', true);
         if (this.elements.thumbnails.isSlideVisible(thumbnail, 10)) return;
 
-        this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
+        // Check if vertical layout (thumbnail_right)
+        const thumbnailList = this.elements.thumbnails.querySelector('.thumbnail-list');
+        const isVertical = thumbnailList && thumbnailList.classList.contains('thumbnail-list--vertical');
+
+        if (isVertical) {
+          // Vertical scrolling for thumbnail_right layout
+          this.elements.thumbnails.slider.scrollTo({
+            top: thumbnail.offsetTop - 10,
+            behavior: 'smooth'
+          });
+        } else {
+          // Horizontal scrolling for other layouts
+          this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
+        }
       }
 
       announceLiveRegion(activeItem, position) {
