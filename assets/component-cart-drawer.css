@@ -1,3 +1,8 @@
+.drawer-width {
+  width: 100%;
+  max-width: calc(100% - 4rem);
+  margin: 0 auto;
+}
 .drawer {
   position: fixed;
   z-index: 1000;
@@ -14,12 +19,15 @@
 .drawer.active {
   visibility: visible;
 }
+.drawer hr {
+  margin: 0;
+  background-color: rgba(var(--color-foreground));
+}
 
 .drawer__inner {
   height: 100%;
-  width: 40rem;
+  width: 50rem;
   max-width: calc(100vw - 3rem);
-  padding: 0 1.5rem;
   border: 0.1rem solid rgba(var(--color-foreground), 0.2);
   border-right: 0;
   overflow: hidden;
@@ -31,7 +39,7 @@
 
 .drawer__inner-empty {
   height: 100%;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -72,36 +80,46 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   position: relative;
   padding: 1.5rem 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
 .drawer__heading {
-  margin: 0 0 1rem;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: clamp(1.3rem, 1.6vw, 1.8rem);
+  line-height: 1;
 }
 
 .drawer__close {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
-  min-width: 4.4rem;
-  min-height: 4.4rem;
-  box-shadow: 0 0 0 0.2rem rgba(var(--color-button), 0);
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  box-shadow: 0 0 0 .1rem rgba(var(--color-button), 0.5);
   position: absolute;
-  top: 10px;
-  right: -10px;
-  color: rgb(var(--color-foreground));
+  top: 50%;
+  left: 0;
+  color: rgb(var(--color-foreground), 0.5);
   background-color: transparent;
   border: none;
   cursor: pointer;
+  line-height: 1;
+  border-radius: 50%;
+  transform: translateY(-50%);
 }
 
 .cart-drawer__warnings .drawer__close {
-  right: 5px;
+  top: 1rem;
+  left: 1rem;
+  transform: none;
 }
 
 .drawer__close .svg-wrapper {
-  height: 2rem;
-  width: 2rem;
+  height: 1.2rem;
+  width: 1.2rem;
 }
 
 .drawer__contents {
@@ -111,8 +129,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 }
 
 .drawer__footer {
-  border-top: 0.1rem solid rgba(var(--color-foreground), 0.2);
-  padding: 1.5rem 0;
+  padding: 2rem 0;
 }
 
 cart-drawer-items.is-empty + .drawer__footer {
@@ -202,8 +219,9 @@ cart-drawer-items {
 .cart-drawer .cart-item {
   display: grid;
   grid-template: repeat(2, auto) / repeat(4, 1fr);
-  gap: 1rem;
+  gap: 3rem 1rem;
   margin-bottom: 0;
+  padding-top: 3.5rem;
 }
 
 .cart-drawer .cart-item:last-child {
@@ -216,6 +234,8 @@ cart-drawer-items {
 
 .cart-drawer .cart-item__image {
   max-width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .cart-drawer .cart-item__nested-line .cart-item__image {
@@ -257,7 +277,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-items td {
-  padding-top: 1.7rem;
+  padding-top: 0;
 }
 
 .cart-drawer .cart-items .cart-item__nested-line td:not(.cart-item__quantity) {
@@ -265,7 +285,7 @@ cart-drawer-items {
 }
 
 .cart-drawer .cart-item > td + td {
-  padding-left: 1rem;
+  padding-left: 0;
 }
 
 .cart-drawer .cart-item__details {
@@ -298,7 +318,12 @@ cart-drawer-items {
   padding-top: 0;
   grid-column: 2 / 5;
 }
-
+.cart-drawer .cart-item__actions {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
 @media screen and (max-width: 749px) {
   .cart-drawer .cart-item cart-remove-button {
     margin-left: 0;
@@ -306,11 +331,24 @@ cart-drawer-items {
 }
 
 .cart-drawer__footer > * + * {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .cart-drawer .totals {
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+.cart-drawer .totals .totals__total {
+  text-transform: uppercase;
+  font-family: var(--font-body-family);
+  font-size: calc(var(--font-heading-scale) * 1.5rem);
+  margin: 0;
+}
+.cart-drawer .totals .totals__total-value {
+  text-transform: uppercase;
+  font-size: calc(var(--font-heading-scale) * 1.5rem);
+  margin-left: 1rem;
 }
 
 .cart-drawer .price {
@@ -318,8 +356,12 @@ cart-drawer-items {
 }
 
 .cart-drawer .tax-note {
-  margin: 1.2rem 0 2rem auto;
-  text-align: left;
+  margin: 1.8rem 0 0;
+  text-align: center;
+}
+
+.drawer__footer .cart__ctas {
+  margin-top: 1.8rem;
 }
 
 .cart-drawer .product-option dd {
@@ -332,6 +374,10 @@ cart-drawer-items {
 
 .cart-drawer .cart__checkout-button {
   max-width: none;
+  text-transform: uppercase;
+  min-height: auto;
+  padding: 1.2rem;
+  font-size: 1.3rem;
 }
 
 .drawer__footer .cart__dynamic-checkout-buttons {
