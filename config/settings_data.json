@@ -129,6 +129,13 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
+    "show_free_shipping_banner": true,
+    "free_shipping_threshold": 250,
+    "free_shipping_message_below": "{amount} Until <b>free shipping!</b>",
+    "free_shipping_message_reached": "Your Shipping is FREE!",
+    "show_free_shipping_progress_bar": false,
+    "free_shipping_banner_bg": "#5433eb",
+    "show_cart_recommendations": true,
     "sections": {
       "main-password-header": {
         "type": "main-password-header",

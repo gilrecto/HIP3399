@@ -74,6 +74,9 @@
           </span>
         </button>
       </div>
+      {%- if cart != empty -%}
+        {% render 'cart-free-shipping-banner' %}
+      {%- endif -%}
       <cart-drawer-items
         {% if cart == empty %}
           class=" is-empty"
@@ -478,6 +481,9 @@
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
       </cart-drawer-items>
+      {%- if cart != empty -%}
+        {% render 'cart-recommendations' %}
+      {%- endif -%}
       <div class="drawer__footer">
         <hr>
         <div class="drawer-width">

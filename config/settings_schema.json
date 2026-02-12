@@ -1455,6 +1455,97 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "Free Shipping Banner"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_free_shipping_banner",
+        "label": "Enable free shipping progress banner",
+        "default": false,
+        "info": "Show a progress banner indicating how close customers are to free shipping"
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "default": 50,
+        "info": "Minimum order amount for free shipping (in your store's currency)",
+        "visible_if": "{{ settings.show_free_shipping_banner == true }}"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_message_below",
+        "label": "Message when below threshold",
+        "default": "You're {amount} away from free shipping!",
+        "info": "Use {amount} as placeholder for remaining amount",
+        "visible_if": "{{ settings.show_free_shipping_banner == true }}"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_message_reached",
+        "label": "Message when threshold reached",
+        "default": "Congratulations! You've qualified for free shipping!",
+        "info": "Message shown when customer qualifies for free shipping",
+        "visible_if": "{{ settings.show_free_shipping_banner == true }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_free_shipping_progress_bar",
+        "label": "Show Shipping Progress Bar",
+        "default": false,
+        "visible_if": "{{ settings.show_free_shipping_banner == true }}"
+      },
+      {
+        "type": "color",
+        "id": "free_shipping_banner_bg",
+        "label": "Banner background color",
+        "default": "#6366f1",
+        "visible_if": "{{ settings.show_free_shipping_banner == true }}"
+      },
+      {
+        "type": "color",
+        "id": "free_shipping_banner_text",
+        "label": "Banner text color",
+        "default": "#ffffff",
+        "visible_if": "{{ settings.show_free_shipping_banner == true }}"
+      },
+      {
+        "type": "color",
+        "id": "free_shipping_progress_bar",
+        "label": "Progress Bar Color",
+        "default": "#ffffff",
+        "visible_if": "{{ settings.show_free_shipping_progress_bar == true and settings.show_free_shipping_banner == true }}"
+      },
+      {
+        "type": "header",
+        "content": "Recommended Products"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_recommendations",
+        "label": "Show recommended products",
+        "default": false,
+        "info": "Display product recommendations in the cart drawer"
+      },
+      {
+        "type": "text",
+        "id": "cart_recommendations_heading",
+        "label": "Section heading",
+        "default": "You may also like",
+        "visible_if": "{{ settings.show_cart_recommendations == true }}"
+      },
+      {
+        "type": "range",
+        "id": "cart_recommendations_limit",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "default": 3,
+        "label": "Number of products to show",
+        "visible_if": "{{ settings.show_cart_recommendations == true }}"
       }
     ]
   }
