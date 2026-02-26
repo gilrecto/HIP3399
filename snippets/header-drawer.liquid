@@ -4,8 +4,15 @@
   Usage:
   {% render 'header-drawer' %}
 {% endcomment %}
+{% liquid
+  assign add_drawer_logo = false
 
-<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  if section.settings.enable_menu_drawer_logo and section.settings.menu_drawer_logo != blank
+    assign add_drawer_logo = true
+  endif
+%}
+
+<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}"{% if add_drawer_logo %} class="header-drawer--with-logo"{% endif %}>
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
       class="header__icon header__icon--menu header__icon--summary link focus-inset"
@@ -18,6 +25,33 @@
     </summary>
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
       <div class="menu-drawer__inner-container">
+        {%- if add_drawer_logo -%}
+          <div class="menu-drawer__logo">
+            {%- if section.settings.menu_drawer_logo_link != blank -%}
+              <a href="{{ section.settings.menu_drawer_logo_link }}" class="menu-drawer__logo-link">
+                {{
+                  section.settings.menu_drawer_logo
+                  | image_url: width: 400
+                  | image_tag:
+                    class: 'menu-drawer__logo-image',
+                    width: section.settings.menu_drawer_logo_width,
+                    alt: section.settings.menu_drawer_logo.alt | default: shop.name,
+                    loading: 'lazy'
+                }}
+              </a>
+            {%- else -%}
+              {{
+                section.settings.menu_drawer_logo
+                | image_url: width: 400
+                | image_tag:
+                  class: 'menu-drawer__logo-image',
+                  width: section.settings.menu_drawer_logo_width,
+                  alt: section.settings.menu_drawer_logo.alt | default: shop.name,
+                  loading: 'lazy'
+              }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">

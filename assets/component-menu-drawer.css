@@ -1,6 +1,10 @@
 .header__icon--menu {
   position: initial;
 }
+.header__icon--menu span {
+  position: relative;
+  z-index: 5;
+}
 
 .js menu-drawer > details > summary::before,
 .js menu-drawer > details[open]:not(.menu-opening) > summary::before {
@@ -41,10 +45,16 @@ menu-drawer > details[open] > summary::before {
       rgba(var(--color-shadow), var(--drawer-shadow-opacity))
   );
 }
+.header-drawer--with-logo .menu-drawer {
+  top: 0;
+}
 
 .js .menu-drawer {
   height: calc(100vh - 100%);
   height: calc(var(--viewport-height, 100vh) - (var(--header-bottom-position, 100%)));
+}
+.header-drawer--with-logo .menu-drawer {
+  height: 100vh;
 }
 
 .js details[open] > .menu-drawer,
@@ -76,6 +86,48 @@ details[open].menu-opening > .menu-drawer__submenu {
   height: 100%;
 }
 
+/* Mobile Menu Drawer Logo - Position in header area inline with close button */
+.menu-drawer__logo {
+  display: none;
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  height: 4.4rem;
+  padding: 0;
+}
+
+details[open] .menu-drawer__logo {
+  display: flex;
+}
+
+.menu-drawer__logo-link {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.menu-drawer__logo-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 749px) {
+  details[open] .menu-drawer__logo {
+    right: 2rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  details[open] .menu-drawer__logo {
+    right: 1.5rem;
+  }
+}
+
 .menu-drawer__navigation-container {
   display: grid;
   grid-template-rows: 1fr auto;
@@ -86,6 +138,10 @@ details[open].menu-opening > .menu-drawer__submenu {
 
 .menu-drawer__navigation {
   padding: 3rem 0;
+}
+
+.header-drawer--with-logo .menu-drawer__navigation {
+  padding-top: var(--header-height);
 }
 
 .menu-drawer__inner-submenu {
@@ -143,6 +199,10 @@ details[open].menu-opening > .menu-drawer__submenu {
   z-index: 1;
   transform: translateX(100%);
   visibility: hidden;
+}
+
+.header-drawer--with-logo .menu-drawer__submenu {
+  top: var(--header-height);
 }
 
 .js .menu-drawer__submenu .menu-drawer__submenu {

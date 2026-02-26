@@ -46,7 +46,7 @@
     -%}
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template.suffix | default: request.page_type }}-page">
+  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template.suffix | default: request.page_type }}-page{% if request.page_type == 'collection' and template.suffix != blank %} collection-page{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

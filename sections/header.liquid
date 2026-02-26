@@ -612,6 +612,41 @@
     },
     {
       "type": "header",
+      "content": "Mobile Menu Drawer Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_menu_drawer_logo",
+      "default": false,
+      "label": "Show logo in mobile menu drawer",
+      "info": "Display an additional logo in the top right corner of the mobile menu drawer"
+    },
+    {
+      "type": "image_picker",
+      "id": "menu_drawer_logo",
+      "label": "Mobile menu drawer logo",
+      "visible_if": "{{ section.settings.enable_menu_drawer_logo == true }}"
+    },
+    {
+      "type": "range",
+      "id": "menu_drawer_logo_width",
+      "min": 30,
+      "max": 200,
+      "step": 5,
+      "default": 80,
+      "unit": "px",
+      "label": "Logo width",
+      "visible_if": "{{ section.settings.enable_menu_drawer_logo == true }}"
+    },
+    {
+      "type": "url",
+      "id": "menu_drawer_logo_link",
+      "label": "Logo link (optional)",
+      "info": "Leave empty if logo should not be clickable",
+      "visible_if": "{{ section.settings.enable_menu_drawer_logo == true }}"
+    },
+    {
+      "type": "header",
       "content": "t:sections.all.spacing"
     },
     {
