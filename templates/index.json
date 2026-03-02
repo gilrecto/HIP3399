@@ -22,14 +22,6 @@
             "letter_spacing": 0
           }
         },
-        "buttons_pPtqqb": {
-          "type": "buttons",
-          "settings": {
-            "button_url": "shopify://collections/business-collection",
-            "button_text": "COLLECTION",
-            "btn_style": "button--outline"
-          }
-        },
         "buttons_8MJJqw": {
           "type": "buttons",
           "settings": {
@@ -41,7 +33,6 @@
       },
       "block_order": [
         "heading_8Pyecx",
-        "buttons_pPtqqb",
         "buttons_8MJJqw"
       ],
       "custom_css": [
