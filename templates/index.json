@@ -16,7 +16,7 @@
           "type": "heading",
           "settings": {
             "type": "title",
-            "heading_text": "SWEATSUIT SETS",
+            "heading_text": "",
             "heading_size": "ts:!text-3xl",
             "text_transform": "ts:uppercase",
             "letter_spacing": 0
