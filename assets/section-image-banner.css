@@ -5,6 +5,11 @@
   z-index: auto;
   isolation: isolate;
 }
+.banner.page-width {
+  display: grid;
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
 
 .banner__box {
   text-align: center;
@@ -165,6 +170,12 @@
   top: 0;
   width: 100%;
 }
+.banner.page-width .banner__media {
+  position: relative;
+  height: auto;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+}
 
 .banner__media-half {
   width: 50%;
@@ -274,6 +285,11 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+}
+
+.banner.page-width .banner__content {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1; 
 }
 
 @media screen and (min-width: 750px) {

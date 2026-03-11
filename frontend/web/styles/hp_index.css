@@ -1,4 +1,4 @@
-body.index-page .section-header {
+/* body.index-page .section-header {
 	@apply ts:fixed ts:top-0 ts:left-0 ts:w-full;
 }
 body.index-page .section-header:not(.scrolled-past-header, .menu-open) > sticky-header:not(.header--mega-menu-open) {
@@ -14,4 +14,4 @@ body.index-page .section-header .header__search .search-modal {
 	body.index-page .section-header:not(.scrolled-past-header, .menu-open) > sticky-header:not(.header--mega-menu-open) {
     --gradient-background: transparent;
 	}
-}
+} */
