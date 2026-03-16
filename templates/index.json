@@ -118,6 +118,18 @@
     },
     "image_banner_n6pxdY": {
       "type": "image-banner",
+      "blocks": {
+        "heading_RTr8w4": {
+          "type": "heading",
+          "settings": {
+            "heading": "HIP CORE PIECES",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_RTr8w4"
+      ],
       "custom_css": [
         "@media only screen and (min-width: 1025px) {.banner.page-width {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
       ],
