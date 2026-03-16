@@ -17,7 +17,7 @@
           "settings": {
             "type": "title",
             "heading_text": "2026 EXPANSION COLLECTION",
-            "heading_size": "ts:!text-lg",
+            "heading_size": "ts:!text-xl",
             "text_transform": "ts:uppercase",
             "letter_spacing": 0
           }
@@ -40,45 +40,25 @@
         "add_overlay": false,
         "overlay_opacity": 0.5,
         "enable_audio": false,
+        "redirect_to_page": true,
+        "redirect_url": "shopify://collections/business-collection",
+        "redirect_label": "2026 EXPANSION COLLECTION",
+        "show_content_on_hover": true,
         "banner_image": "shopify://shop_images/hp_banner1.jpg",
         "banner_img_mb": "shopify://shop_images/hp_banner1_mob.jpg",
         "video": "shopify://files/videos/DOOR V5.mp4",
         "poster": "shopify://shop_images/hp_banner1.jpg",
         "mb_poster": "shopify://shop_images/hp_banner1_mob.jpg",
         "content_alignment_h": "ts:md:items-center",
-        "content_alignment_v": "ts:md:justify-end",
+        "content_alignment_v": "ts:md:justify-center",
         "text_alignment": "center",
         "content_alignment_h_mobile": "ts:items-center",
-        "content_alignment_v_mobile": "ts:justify-end",
+        "content_alignment_v_mobile": "ts:justify-center",
         "text_alignment_mobile": "center",
         "top_spacing": 0,
-        "bottom_spacing": 9,
+        "bottom_spacing": 0,
         "top_spacing_mobile": 0,
-        "bottom_spacing_mobile": 7.5
-      }
-    },
-    "image_banner_3iFzRA": {
-      "type": "image-banner",
-      "disabled": true,
-      "custom_css": [
-        ".banner {margin-bottom: 2rem;}",
-        "@media only screen and (min-width: 1025px) {.banner.page-width {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
-      ],
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/hp_banner1.jpg",
-        "mobile_image": "shopify://shop_images/hp_banner1_mob.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "image_behavior": "none",
-        "fullwidth_banner": false,
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
+        "bottom_spacing_mobile": 0
       }
     },
     "image_banner_QXywxk": {
@@ -88,7 +68,7 @@
           "type": "heading",
           "settings": {
             "heading": "SHOP ALL",
-            "heading_size": "h2"
+            "heading_size": "ts:!text-xl"
           }
         }
       },
@@ -106,6 +86,10 @@
         "image_overlay_opacity": 0,
         "image_height": "adapt",
         "image_behavior": "none",
+        "redirect_to_page": true,
+        "redirect_url": "shopify://collections/shop-catalog",
+        "redirect_label": "SHOP ALL",
+        "show_content_on_hover": true,
         "fullwidth_banner": false,
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
@@ -123,7 +107,7 @@
           "type": "heading",
           "settings": {
             "heading": "HIP CORE PIECES",
-            "heading_size": "h2"
+            "heading_size": "ts:!text-xl"
           }
         }
       },
@@ -131,6 +115,7 @@
         "heading_RTr8w4"
       ],
       "custom_css": [
+        ".banner {margin-bottom: 2rem;}",
         "@media only screen and (min-width: 1025px) {.banner.page-width {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
       ],
       "name": "t:sections.image-banner.presets.name",
@@ -140,6 +125,48 @@
         "image_overlay_opacity": 0,
         "image_height": "adapt",
         "image_behavior": "none",
+        "redirect_to_page": true,
+        "redirect_url": "shopify://collections/hip-core-sweatsuit-set",
+        "redirect_label": "HIP CORE PIECES",
+        "show_content_on_hover": true,
+        "fullwidth_banner": false,
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "image_banner_3iFzRA": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_6dtWfH": {
+          "type": "heading",
+          "settings": {
+            "heading": "ART BY HIPBOY",
+            "heading_size": "ts:!text-xl"
+          }
+        }
+      },
+      "block_order": [
+        "heading_6dtWfH"
+      ],
+      "custom_css": [
+        "@media only screen and (min-width: 1025px) {.banner.page-width {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/hp_banner1.jpg",
+        "mobile_image": "shopify://shop_images/hp_banner1_mob.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "redirect_to_page": true,
+        "redirect_url": "shopify://collections/art-by-hipboy",
+        "redirect_label": "ART BY HIPBOY",
+        "show_content_on_hover": true,
         "fullwidth_banner": false,
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
@@ -271,6 +298,10 @@
         "add_overlay": false,
         "overlay_opacity": 0.5,
         "enable_audio": false,
+        "redirect_to_page": false,
+        "redirect_url": "",
+        "redirect_label": "",
+        "show_content_on_hover": false,
         "banner_image": "shopify://shop_images/essentials_banner.jpg",
         "banner_img_mb": "shopify://shop_images/essentials_banner_mob.jpg",
         "content_alignment_h": "ts:md:items-center",
@@ -381,9 +412,9 @@
   },
   "order": [
     "hp_banner_yAYTr8",
-    "image_banner_3iFzRA",
     "image_banner_QXywxk",
     "image_banner_n6pxdY",
+    "image_banner_3iFzRA",
     "hp_featured_collection_AYMbnB",
     "hp_featured_collection_UHqmKN",
     "hp_banner_XidWXt",

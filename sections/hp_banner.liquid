@@ -32,7 +32,7 @@
 	{% endif %}
 {% endstyle %}
 
-<div class="color-{{ section.settings.color_scheme }} media-banner ts:relative ts:w-full ts:md:aspect-video ts:aspect-3/4 ts:xl:h-(--banner-h) ts:overflow-hidden ts:grid ts:grid-rows-1 ts:grid-cols-1{% if section.index == 1 %} page-main-banner{% endif %}">
+<div class="color-{{ section.settings.color_scheme }} media-banner ts:relative ts:w-full ts:md:aspect-video ts:aspect-3/4 ts:xl:h-(--banner-h) ts:overflow-hidden ts:grid ts:grid-rows-1 ts:grid-cols-1{% if section.index == 1 %} page-main-banner{% endif %}{% if setting.redirect_to_page and setting.show_content_on_hover %} show-content-on-hover{% endif %}">
 	{%- if setting.add_overlay -%}
 		<div class="overlay ts:relative ts:z-1 ts:row-span-full ts:col-span-full ts:bg-[rgba(var(--color-foreground))] ts:opacity-(--overlay-opacity) ts:pointer-events:none">&nbsp;</div>
 	{%- endif -%}
@@ -98,12 +98,15 @@
 	</div>
 
 	<div class="banner-contents ts:relative ts:z-2 ts:flex ts:flex-col {{ setting.content_alignment_h }} {{ setting.content_alignment_h_mobile }} {{ setting.content_alignment_v }} {{ setting.content_alignment_v_mobile }} ts:pt-(--top-spacing) ts:pb-(--bottom-spacing) text-align ts:row-span-full ts:col-span-full ts:px-8">
+		{%- if setting.redirect_to_page and setting.redirect_url != blank -%}
+			<a href="{{ setting.redirect_url }}" class="redirect-link" title="{{ setting.redirect_label }}">{{ setting.redirect_label | default: 'Banner Redirect' }}</a>
+		{%- endif -%}
 		<div class="contents-wrapper ts:w-auto ts:md:p-8 ts:p-4{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
 			{%- for block in section.blocks -%}
 				{% case block.type %}
 					{% when 'heading' %}
 						{%- if block.settings.type == 'title' -%}
-							<h2 class="{{ block.settings.text_transform }} {{ block.settings.heading_size }} ts:leading-none ts:font-normal ts:tracking-(--letter-spacing)!" {{ block.shopify_attributes }} style="--letter-spacing: {{ block.settings.letter_spacing }}px;">
+							<h2 class="{{ block.settings.text_transform }} {{ block.settings.heading_size }} ts:font-normal ts:tracking-(--letter-spacing)!" {{ block.shopify_attributes }} style="--letter-spacing: {{ block.settings.letter_spacing }}px;">
 								{{ block.settings.heading_text }}
 							</h2>
 						{% elsif block.settings.type == 'body' %}
@@ -313,6 +316,31 @@
 				"label": "Enable Audio",
 				"default": false,
 				"visible_if": "{{ section.settings.banner_type == 'video' }}"
+			},
+			{
+				"type": "checkbox",
+				"id": "redirect_to_page",
+				"label": "Redirect to Page",
+				"default": false
+			},
+			{
+				"type": "url",
+				"id": "redirect_url",
+				"label": "Redirect URL",
+				"visible_if": "{{ section.settings.redirect_to_page == true }}"
+			},
+			{
+				"type": "text",
+				"id": "redirect_label",
+				"label": "Redirect Label",
+				"visible_if": "{{ section.settings.redirect_to_page == true }}"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_content_on_hover",
+				"label": "Show Content on Hover",
+				"default": false,
+				"visible_if": "{{ section.settings.redirect_to_page == true }}"
 			},
 			{
 				"type": "header",

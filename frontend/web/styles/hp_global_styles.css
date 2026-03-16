@@ -28,6 +28,15 @@ button, a, .button, .btn {
 .link, .customer a {
 	@apply ts:underline-offset-5
 }
+a.redirect-link {
+	@apply ts:absolute ts:top-0 ts:left-0 ts:w-full ts:h-full ts:text-[0px] ts:z-2;
+}
+.show-content-on-hover > .banner-contents {
+	@apply ts:transition-all! ts:duration-300! ts:ease-linear! ts:bg-[rgba(var(--color-background),0.3)] ts:lg:opacity-0 ts:lg:invisible;
+}
+.show-content-on-hover:hover > .banner-contents {
+	@apply ts:lg:opacity-100 ts:lg:visible;
+}
 
 /* Header Styles */
 .section-header > sticky-header {
