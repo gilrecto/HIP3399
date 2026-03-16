@@ -67,7 +67,8 @@
     "image_banner_3iFzRA": {
       "type": "image-banner",
       "custom_css": [
-        ".banner {margin-bottom: 2rem;}"
+        ".banner {margin-bottom: 2rem;}",
+        "@media only screen and (min-width: 1025px) {.banner.page-width {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
       ],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
@@ -89,7 +90,8 @@
     "image_banner_QXywxk": {
       "type": "image-banner",
       "custom_css": [
-        ".banner {margin-bottom: 2rem;}"
+        ".banner {margin-bottom: 2rem;}",
+        "@media only screen and (min-width: 1025px) {.banner.page-width {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
       ],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
@@ -110,6 +112,9 @@
     },
     "image_banner_n6pxdY": {
       "type": "image-banner",
+      "custom_css": [
+        "@media only screen and (min-width: 1025px) {.banner.page-width {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
+      ],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/hp_banner3.jpg",
