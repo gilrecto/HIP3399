@@ -12,7 +12,7 @@
     "hp_banner_yAYTr8": {
       "type": "hp_banner",
       "custom_css": [
-        ".media-banner {--banner-h: auto; margin: 0 auto 2rem; background-color: transparent; padding: 0 2rem;}",
+        ".media-banner {--banner-h: auto; margin: 0 auto 2rem; background-color: transparent; padding: 0 2rem; aspect-ratio: 2.5;}",
         "@media only screen and (min-width: 768px) {.media-banner {padding: 0 3rem; }}",
         "@media only screen and (min-width: 992px) {.media-banner {padding: 0 5rem; }}",
         "@media only screen and (min-width: 1025px) {.media-banner {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
