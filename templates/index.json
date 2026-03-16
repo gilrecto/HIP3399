@@ -11,6 +11,21 @@
   "sections": {
     "hp_banner_yAYTr8": {
       "type": "hp_banner",
+      "blocks": {
+        "heading_fNgxNe": {
+          "type": "heading",
+          "settings": {
+            "type": "title",
+            "heading_text": "2026 EXPANSION COLLECTION",
+            "heading_size": "ts:!text-lg",
+            "text_transform": "ts:uppercase",
+            "letter_spacing": 0
+          }
+        }
+      },
+      "block_order": [
+        "heading_fNgxNe"
+      ],
       "custom_css": [
         ".media-banner {--banner-h: auto; margin: 0 auto 2rem; background-color: transparent; padding: 0 2rem; aspect-ratio: 2.5;}",
         "@media only screen and (min-width: 768px) {.media-banner {padding: 0 3rem; }}",
@@ -68,6 +83,18 @@
     },
     "image_banner_QXywxk": {
       "type": "image-banner",
+      "blocks": {
+        "heading_r6MYr9": {
+          "type": "heading",
+          "settings": {
+            "heading": "SHOP ALL",
+            "heading_size": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "heading_r6MYr9"
+      ],
       "custom_css": [
         ".banner {margin-bottom: 2rem;}",
         "@media only screen and (min-width: 1025px) {.banner.page-width {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}"
@@ -83,7 +110,7 @@
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
         "show_text_box": false,
-        "color_scheme": "",
+        "color_scheme": "scheme-3",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
@@ -105,7 +132,7 @@
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
         "show_text_box": false,
-        "color_scheme": "",
+        "color_scheme": "scheme-3",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
