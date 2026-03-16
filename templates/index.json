@@ -12,9 +12,10 @@
     "hp_banner_yAYTr8": {
       "type": "hp_banner",
       "custom_css": [
-        ".contents-wrapper h2 {--letter-spacing: clamp(0.75rem, 1.2vw, 2rem) !important; font-weight: 400; --tw-leading: 1.3; margin-bottom: clamp(10rem, 9vw, 11.5rem);}",
-        "@media only screen and (min-width: 992px) {.btn-wrapper {gap: clamp(8.5rem, 9vw, 11.5rem); }}",
-        "@media only screen and (max-width: 767px) {.btn-wrapper {flex-direction: column; row-gap: 2rem; } .btn-wrapper > a {min-width: 28rem; }}"
+        ".media-banner {--banner-h: auto; margin: 0 auto 2rem; background-color: transparent; padding: 0 2rem;}",
+        "@media only screen and (min-width: 1025px) {.media-banner {max-width: calc(clamp(60rem, 27.933vw + 31.369rem, 82.5rem)); }}",
+        "@media only screen and (min-width: 992px) {.media-banner {padding: 0 5rem; }}",
+        "@media only screen and (min-width: 768px) {.media-banner {padding: 0 3rem; }}"
       ],
       "name": "Banner",
       "settings": {
