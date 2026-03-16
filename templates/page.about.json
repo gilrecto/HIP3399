@@ -24,8 +24,8 @@
         "image_7cVQY3": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/about_img.jpg",
-            "image_mb": "shopify://shop_images/about_img_mob.jpg"
+            "image": "shopify://shop_images/about_img_new.jpg",
+            "image_mb": "shopify://shop_images/about_img_new_mob.jpg"
           }
         },
         "text_qijeQa": {
