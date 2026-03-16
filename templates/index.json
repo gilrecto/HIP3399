@@ -20,7 +20,7 @@
       "name": "Banner",
       "settings": {
         "color_scheme": "scheme-3",
-        "banner_type": "image",
+        "banner_type": "video",
         "banner_height": 100,
         "add_overlay": false,
         "overlay_opacity": 0.5,
