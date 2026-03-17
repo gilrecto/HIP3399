@@ -158,8 +158,8 @@
       ],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "image": "shopify://shop_images/hp_banner1.jpg",
-        "mobile_image": "shopify://shop_images/hp_banner1_mob.jpg",
+        "image": "shopify://shop_images/hp_banner4.jpg",
+        "mobile_image": "shopify://shop_images/hp_banner4_mob.jpg",
         "image_overlay_opacity": 0,
         "image_height": "adapt",
         "image_behavior": "none",
