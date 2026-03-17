@@ -34,7 +34,7 @@
       ],
       "name": "Banner",
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-94dd5200-73ec-40cf-95b4-6b3ce7313a12",
         "banner_type": "video",
         "banner_height": 100,
         "add_overlay": false,
@@ -94,7 +94,7 @@
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
         "show_text_box": false,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-94dd5200-73ec-40cf-95b4-6b3ce7313a12",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
@@ -133,7 +133,7 @@
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
         "show_text_box": false,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-94dd5200-73ec-40cf-95b4-6b3ce7313a12",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
@@ -171,7 +171,7 @@
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
         "show_text_box": false,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-94dd5200-73ec-40cf-95b4-6b3ce7313a12",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
