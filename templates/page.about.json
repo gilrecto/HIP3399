@@ -44,7 +44,8 @@
         ".rich-text__wrapper {width: 100%;}",
         ".rich-text {padding-bottom: calc(clamp(16.5rem, 2.083vw + 16.5rem, 20.5rem));}",
         ".rich-text__blocks {max-width: 83rem;}",
-        ".rich-text__image {margin-top: clamp(1.2rem, 1.8vw, 3rem);}"
+        ".rich-text__image {margin-top: clamp(1.2rem, 1.8vw, 3rem);}",
+        ".rich-text__text.rte p:not(:last-of-type) {margin-bottom: 1.6rem;}"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
