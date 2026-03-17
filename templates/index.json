@@ -180,7 +180,7 @@
     "hp_featured_collection_AYMbnB": {
       "type": "hp_featured_collection",
       "custom_css": [
-        "@media only screen and (min-width: 768px) {swiper-slider .swiper .swiper-wrapper {column-gap: calc(clamp(2.5rem, 19.531vw - 12.5rem, 25rem)); }}"
+        "/* @media only screen and (min-width: 768px) {swiper-slider .swiper .swiper-wrapper {column-gap: calc(clamp(2.5rem, 19.531vw - 12.5rem, 25rem)); }} */"
       ],
       "name": "ACCESSORIES",
       "settings": {
@@ -192,8 +192,8 @@
         "to_uppercase": true,
         "title_align_desktop": "left",
         "title_align_mobile": "left",
-        "collection": "accessories-1",
-        "products_to_show": 3,
+        "collection": "art-by-hipboy",
+        "products_to_show": 4,
         "add_collection_image": false,
         "image_ratio": "portrait",
         "image_shape": "default",
@@ -206,7 +206,7 @@
         "view_all_align_desktop": "center",
         "view_all_align_mobile": "center",
         "desktop_layout": "grid",
-        "desktop_columns": "3",
+        "desktop_columns": "4",
         "mobile_layout": "swiper",
         "mobile_columns": "2",
         "swiper_slides_per_view": 3,
