@@ -182,7 +182,7 @@
       "custom_css": [
         "@media only screen and (min-width: 768px) {swiper-slider .swiper .swiper-wrapper {column-gap: calc(clamp(2.5rem, 19.531vw - 12.5rem, 25rem)); }}"
       ],
-      "name": "New Arrivals",
+      "name": "ACCESSORIES",
       "settings": {
         "color_scheme": "",
         "show_title": true,
